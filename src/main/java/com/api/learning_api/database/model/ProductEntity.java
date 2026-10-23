@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ToString
 
-public class ProdutoEntity {
+public class ProductEntity {
     private Integer id;
     private String nome;
     private BigDecimal preco;
