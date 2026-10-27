@@ -54,4 +54,21 @@ public class ProductService {
         return newProduct;
     };
 
+    private ProductEntity findProduct(Integer id) {
+       return PRODUCTS.stream()
+       .filter(products -> products.getId().equals(id))
+       .findFirst()
+       .orElseThrow(() -> new RuntimeException("Product not found"));
+    }
+
+    public ProductEntity editProduct(ProductDto productDto, Integer id) {
+       ProductEntity targetProduct = findProduct(id);
+
+       targetProduct.setNome(productDto.getNome());
+       targetProduct.setPreco(productDto.getPreco());
+       targetProduct.setQuantidade(productDto.getQuantidade());
+       
+        return targetProduct;
+    }
+
 }
