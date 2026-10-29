@@ -71,4 +71,9 @@ public class ProductService {
         return targetProduct;
     }
 
+    public void removeProduct(Integer id) {
+        ProductEntity targetProduct = findProduct(id);
+        PRODUCTS.remove(targetProduct);
+    }
+
 }

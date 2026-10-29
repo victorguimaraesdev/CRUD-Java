@@ -10,6 +10,7 @@ import com.api.learning_api.database.model.ProductEntity;
 import com.api.learning_api.dto.ProductDto;
 import com.api.learning_api.service.ProductService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 // import lombok.RequiredArgsConstructor;
-
-
-
-
 
 @RestController 
 @RequestMapping("/produtos") 
@@ -33,22 +30,28 @@ public class ProductController {
         this.productService = produtoService;
     }
     
-    @GetMapping("/all")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK) 
     public List<ProductEntity> getAll(){
         return productService.findAll();
     }
 
-    @PostMapping("/post")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ProductEntity createProduct(@RequestBody ProductDto productDto){
         return productService.creatProduct(productDto);
     }
      
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductEntity editProduct(@RequestBody ProductDto productDto, @PathVariable Integer id){
         return productService.editProduct(productDto, id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void editProduct(@PathVariable Integer id){
+         productService.removeProduct(id);
     }
 
 }
